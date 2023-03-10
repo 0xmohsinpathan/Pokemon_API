@@ -13,6 +13,7 @@ defmodule Pokemon.Find do
     :types
   ]
 
+  @spec filter_pokemon(bitstring) :: struct
   def filter_pokemon(search) do
     pokemons = list_of_pokemon()
 
