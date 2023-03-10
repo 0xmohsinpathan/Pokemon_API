@@ -13,7 +13,21 @@ defmodule Pokemon.Find do
     :types
   ]
 
-  def filter(search) do
+  def filter_pokemon(search) do
+    pokemons = list_of_pokemon()
+
+    pokemon_url =
+      Enum.filter(pokemons, fn pokemon ->
+        %{"name" => pokemon_name, "url" => url} = pokemon
+
+        if pokemon_name == search do
+          HTTPoison.get(url)
+        end
+      end)
+
+    [%{"name" => _name, "url" => api_url}] = pokemon_url
+    information = info_pokemon(api_url)
+    making_struct(information)
   end
 
   defp making_struct(abilities) do
@@ -51,6 +65,11 @@ defmodule Pokemon.Find do
     }
 
     Kernel.struct(Pokemon.Find, map)
+  end
+
+  defp info_pokemon(api_url) do
+    {:ok, response} = HTTPoison.get(api_url)
+    Poison.decode!(response.body)
   end
 
   defp list_of_pokemon() do
