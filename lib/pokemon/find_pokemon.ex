@@ -36,8 +36,6 @@ defmodule Pokemon.Find do
 
   @spec filter_pokemon(String.t()) :: {:ok, %Find{}} | {:error, String.t()}
   def filter_pokemon(search) do
-    # // TODO clean up search for whitespace trim
-    # // TODO: {:ok , struct} path
     search = String.trim(search)
 
     pokemons = list_of_pokemon()
@@ -105,7 +103,7 @@ defmodule Pokemon.Find do
       id: id
     }
 
-    Kernel.struct(Pokemon.Find, map)
+    Kernel.struct(Find, map)
   end
 
   defp info_pokemon(api_url) do

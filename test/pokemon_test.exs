@@ -23,11 +23,11 @@ defmodule PokemonTest do
     end
 
     test "test with wrong spelling" do
-      assert Find.filter_pokemon("ditt") == {:error, "error occured"}
+      assert Find.filter_pokemon("ditt") == {:error, "Invalid Input"}
     end
 
     test "test with empty string" do
-      assert Find.filter_pokemon("") == {:error, "error occured"}
+      assert Find.filter_pokemon("") == {:error, "Invalid Input"}
     end
   end
 end
